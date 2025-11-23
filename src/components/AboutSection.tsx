@@ -25,13 +25,17 @@ const AboutSection = () => {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-gold rounded-3xl blur-2xl opacity-20"></div>
-            <img
-              src={gretherWorkingImage}
-              alt="Grether Gavilan Anias - Esteticista Profesional"
-              className="relative rounded-3xl shadow-medium w-full h-auto object-cover"
-            />
+          <div className="relative flex justify-center md:justify-start">
+            <div className="relative w-full max-w-sm">
+              <div className="absolute -inset-4 bg-gradient-gold rounded-3xl blur-2xl opacity-20"></div>
+              <div className="relative aspect-[9/16] rounded-3xl overflow-hidden shadow-medium">
+                <img
+                  src={gretherWorkingImage}
+                  alt="Grether Gavilan Anias - Esteticista Profesional"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="space-y-6">
