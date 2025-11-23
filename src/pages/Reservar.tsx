@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { CalendarIcon, User, Phone, Sparkles, Clock, Loader2 } from "lucide-react";
+import { CalendarIcon, User, Phone, Sparkles, Clock, Loader2, Mail } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -46,6 +46,9 @@ const reservaSchema = z.object({
     .max(100, "El nombre es demasiado largo"),
   telefono: z.string()
     .regex(/^(\+34|0034|34)?[6789]\d{8}$/, "Formato de teléfono inválido (ej: +34 603 381 502)"),
+  email: z.string()
+    .email("Correo electrónico inválido")
+    .min(1, "El correo electrónico es requerido"),
   servicio: z.string().min(1, "Selecciona un servicio"),
 });
 
@@ -59,6 +62,7 @@ const Reservar = () => {
     defaultValues: {
       nombre: "",
       telefono: "",
+      email: "",
       hora: "",
       servicio: "",
     },
@@ -73,6 +77,7 @@ const Reservar = () => {
       formData.append('hora', data.hora);
       formData.append('nombre', data.nombre);
       formData.append('telefono', data.telefono);
+      formData.append('email', data.email);
       formData.append('servicio', data.servicio);
       formData.append('timestamp', new Date().toISOString());
 
@@ -114,11 +119,6 @@ const Reservar = () => {
               <p className="text-lg text-muted-foreground">
                 Completa el formulario y te contactaremos para confirmar tu tratamiento
               </p>
-              <div className="bg-secondary/30 border border-primary/20 rounded-lg p-4 mt-4">
-                <p className="text-sm text-foreground/80">
-                  ℹ️ <strong>Importante:</strong> Los contactaremos para confirmar su cita antes. ¡Muchas gracias!
-                </p>
-              </div>
             </div>
 
             <div className="bg-card rounded-2xl shadow-strong p-6 md:p-8 border border-border">
@@ -160,79 +160,100 @@ const Reservar = () => {
                     )}
                   />
 
-                  {/* Fecha */}
+                  {/* Email */}
                   <FormField
                     control={form.control}
-                    name="fecha"
+                    name="email"
                     render={({ field }) => (
-                      <FormItem className="flex flex-col">
+                      <FormItem>
                         <FormLabel className="flex items-center gap-2">
-                          <CalendarIcon className="h-4 w-4 text-primary" />
-                          Fecha Preferida
+                          <Mail className="h-4 w-4 text-primary" />
+                          Correo Electrónico
                         </FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant="outline"
-                                className={cn(
-                                  "w-full pl-3 text-left font-normal",
-                                  !field.value && "text-muted-foreground"
-                                )}
-                              >
-                                {field.value ? (
-                                  format(field.value, "PPP", { locale: es })
-                                ) : (
-                                  <span>Selecciona una fecha</span>
-                                )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                              mode="single"
-                              selected={field.value}
-                              onSelect={field.onChange}
-                              disabled={(date) => date < new Date()}
-                              initialFocus
-                              className="pointer-events-auto"
-                            />
-                          </PopoverContent>
-                        </Popover>
+                        <FormControl>
+                          <Input type="email" placeholder="ejemplo@correo.com" {...field} />
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
 
-                  {/* Hora */}
-                  <FormField
-                    control={form.control}
-                    name="hora"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="flex items-center gap-2">
-                          <Clock className="h-4 w-4 text-primary" />
-                          Hora Preferida
-                        </FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Selecciona una hora" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {HORAS.map((hora) => (
-                              <SelectItem key={hora} value={hora}>
-                                {hora}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  {/* Fecha y Hora agrupados */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Fecha */}
+                    <FormField
+                      control={form.control}
+                      name="fecha"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col">
+                          <FormLabel className="flex items-center gap-2">
+                            <CalendarIcon className="h-4 w-4 text-primary" />
+                            Fecha Preferida
+                          </FormLabel>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <FormControl>
+                                <Button
+                                  variant="outline"
+                                  className={cn(
+                                    "w-full pl-3 text-left font-normal",
+                                    !field.value && "text-muted-foreground"
+                                  )}
+                                >
+                                  {field.value ? (
+                                    format(field.value, "PPP", { locale: es })
+                                  ) : (
+                                    <span>Selecciona una fecha</span>
+                                  )}
+                                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                </Button>
+                              </FormControl>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                              <Calendar
+                                mode="single"
+                                selected={field.value}
+                                onSelect={field.onChange}
+                                disabled={(date) => date < new Date()}
+                                initialFocus
+                                className="pointer-events-auto"
+                              />
+                            </PopoverContent>
+                          </Popover>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Hora */}
+                    <FormField
+                      control={form.control}
+                      name="hora"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="flex items-center gap-2">
+                            <Clock className="h-4 w-4 text-primary" />
+                            Hora Preferida
+                          </FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Selecciona una hora" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {HORAS.map((hora) => (
+                                <SelectItem key={hora} value={hora}>
+                                  {hora}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
                   {/* Servicio */}
                   <FormField
