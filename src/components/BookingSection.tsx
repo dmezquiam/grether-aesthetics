@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, Sparkles } from "lucide-react";
+import { openCalendlyPopup } from "@/lib/calendly";
 
 const BookingSection = () => {
   return (
@@ -46,6 +47,7 @@ const BookingSection = () => {
 
           <Button
             size="lg"
+            onClick={openCalendlyPopup}
             className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 text-lg px-12 py-6 shadow-strong"
           >
             Reservar Cita Ahora

@@ -1,14 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import logoFull from "@/assets/logo-full.jpeg";
+import { openCalendlyPopup } from "@/lib/calendly";
 
 const Footer = () => {
-  const scrollToBooking = () => {
-    const element = document.getElementById("reservar");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -59,7 +54,7 @@ const Footer = () => {
               Reserva tu tratamiento y comienza a transformar tu piel hoy
             </p>
             <Button
-              onClick={scrollToBooking}
+              onClick={openCalendlyPopup}
               variant="secondary"
               className="w-full bg-primary-foreground text-primary hover:bg-primary-foreground/90"
             >

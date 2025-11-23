@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { openCalendlyPopup } from "@/lib/calendly";
 import facialCleaning from "@/assets/service-facial-cleaning.jpg";
 import dermapen from "@/assets/service-dermapen.jpg";
 import peeling from "@/assets/service-peeling.jpg";
@@ -61,13 +62,6 @@ const ServicesSection = () => {
     },
   ];
 
-  const scrollToBooking = () => {
-    const element = document.getElementById("reservar");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <section id="servicios" className="py-20 bg-gradient-soft">
       <div className="container mx-auto px-4">
@@ -102,7 +96,7 @@ const ServicesSection = () => {
               <CardContent>
                 <p className="text-muted-foreground text-sm mb-4">{service.description}</p>
                 <Button
-                  onClick={scrollToBooking}
+                  onClick={openCalendlyPopup}
                   variant="outline"
                   className="w-full border-primary text-primary hover:bg-secondary"
                 >
@@ -116,7 +110,7 @@ const ServicesSection = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button
             size="lg"
-            onClick={scrollToBooking}
+            onClick={openCalendlyPopup}
             className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-medium"
           >
             Ver Todos los Servicios
@@ -124,7 +118,7 @@ const ServicesSection = () => {
           <Button
             size="lg"
             variant="outline"
-            onClick={scrollToBooking}
+            onClick={openCalendlyPopup}
             className="border-2 border-primary text-primary hover:bg-secondary"
           >
             Reservar Cita

@@ -1,13 +1,8 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-image.jpg";
+import { openCalendlyPopup } from "@/lib/calendly";
 
 const Hero = () => {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 bg-gradient-soft overflow-hidden">
@@ -33,7 +28,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
-                onClick={() => scrollToSection("reservar")}
+                onClick={openCalendlyPopup}
                 className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-medium hover:shadow-strong transition-all duration-300 text-lg px-8 py-6"
               >
                 Agendar Cita Online
