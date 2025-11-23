@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { openCalendlyPopup } from "@/lib/calendly";
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -20,13 +21,6 @@ const TestimonialsSection = () => {
       rating: 5,
     },
   ];
-
-  const scrollToBooking = () => {
-    const element = document.getElementById("reservar");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <section id="testimonios" className="py-20 bg-gradient-soft">
@@ -62,7 +56,7 @@ const TestimonialsSection = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button
             size="lg"
-            onClick={scrollToBooking}
+            onClick={openCalendlyPopup}
             className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-medium"
           >
             Reservar Ahora

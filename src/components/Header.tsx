@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoFull from "@/assets/logo-full.jpeg";
+import { openCalendlyPopup } from "@/lib/calendly";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -59,7 +60,7 @@ const Header = () => {
             {/* Desktop CTA Buttons */}
             <div className="hidden md:flex items-center gap-4">
               <Button
-                onClick={() => scrollToSection("reservar")}
+                onClick={openCalendlyPopup}
                 variant="default"
                 className="bg-primary hover:bg-primary-dark text-primary-foreground"
               >
@@ -98,7 +99,7 @@ const Header = () => {
                 </button>
               ))}
               <Button
-                onClick={() => scrollToSection("reservar")}
+                onClick={openCalendlyPopup}
                 className="w-full bg-primary hover:bg-primary-dark text-primary-foreground mt-4"
               >
                 Reservar Cita
