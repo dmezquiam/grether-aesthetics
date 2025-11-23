@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { openCalendlyPopup } from "@/lib/calendly";
+import { useNavigate } from "react-router-dom";
 import facialCleaning from "@/assets/service-facial-cleaning.jpg";
 import dermapen from "@/assets/service-dermapen.jpg";
 import peeling from "@/assets/service-peeling.jpg";
@@ -11,6 +11,8 @@ import antiaging from "@/assets/service-antiaging.jpg";
 
 
 const ServicesSection = () => {
+  const navigate = useNavigate();
+  
   const services = [
     {
       title: "Limpieza Facial Profunda",
@@ -98,7 +100,7 @@ const ServicesSection = () => {
                 <p className="text-muted-foreground text-sm mb-2">{service.description}</p>
                 <p className="text-primary font-semibold text-sm mb-4">{service.price}</p>
                 <Button
-                  onClick={openCalendlyPopup}
+                  onClick={() => navigate('/reservar')}
                   variant="outline"
                   className="w-full border-primary text-primary hover:bg-secondary"
                 >
@@ -112,7 +114,7 @@ const ServicesSection = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button
             size="lg"
-            onClick={openCalendlyPopup}
+            onClick={() => navigate('/reservar')}
             className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-medium"
           >
             Ver Todos los Servicios
@@ -120,7 +122,7 @@ const ServicesSection = () => {
           <Button
             size="lg"
             variant="outline"
-            onClick={openCalendlyPopup}
+            onClick={() => navigate('/reservar')}
             className="border-2 border-primary text-primary hover:bg-secondary"
           >
             Reservar Cita

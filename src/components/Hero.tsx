@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-grether.jpg";
-import { openCalendlyPopup } from "@/lib/calendly";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 bg-gradient-soft overflow-hidden">
@@ -28,7 +29,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
-                onClick={openCalendlyPopup}
+                onClick={() => navigate('/reservar')}
                 className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-medium hover:shadow-strong transition-all duration-300 text-lg px-8 py-6"
               >
                 Agendar Cita Online

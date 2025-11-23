@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import logoFull from "@/assets/logo-full.jpeg";
-import { openCalendlyPopup } from "@/lib/calendly";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -54,7 +55,7 @@ const Footer = () => {
               Reserva tu tratamiento y comienza a transformar tu piel hoy
             </p>
             <Button
-              onClick={openCalendlyPopup}
+              onClick={() => navigate('/reservar')}
               variant="secondary"
               className="w-full bg-primary-foreground text-primary hover:bg-primary-foreground/90"
             >

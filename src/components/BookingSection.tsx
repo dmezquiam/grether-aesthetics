@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, Sparkles } from "lucide-react";
-import { openCalendlyPopup } from "@/lib/calendly";
+import { useNavigate } from "react-router-dom";
 
 const BookingSection = () => {
+  const navigate = useNavigate();
+  
   return (
     <section id="reservar" className="py-20 bg-gradient-primary relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
@@ -47,7 +49,7 @@ const BookingSection = () => {
 
           <Button
             size="lg"
-            onClick={openCalendlyPopup}
+            onClick={() => navigate('/reservar')}
             className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 text-lg px-12 py-6 shadow-strong"
           >
             Reservar Cita Ahora
