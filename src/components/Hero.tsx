@@ -50,7 +50,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="relative animate-fade-in flex justify-center">
+          <div className="relative animate-fade-in flex justify-center px-6 md:px-0">
             <div className="relative w-full max-w-sm mx-auto">
               <div className="absolute -inset-4 bg-gradient-primary rounded-3xl blur-2xl opacity-20"></div>
               <div className="relative aspect-[9/16] rounded-3xl overflow-hidden shadow-strong">
