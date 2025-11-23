@@ -93,9 +93,31 @@ const Reservar = () => {
 
       console.log('📥 Respuesta recibida:', response.status);
 
-      const result = await response.json();
-      console.log('📦 Datos de respuesta:', result);
+      // Leer respuesta como texto primero
+      const responseText = await response.text();
+      console.log('🔍 Respuesta en texto:', responseText);
 
+      // Intentar parsear como JSON
+      let result;
+      try {
+        result = JSON.parse(responseText);
+        console.log('📦 Datos de respuesta parseados:', result);
+      } catch (parseError) {
+        console.error('⚠️ Error al parsear JSON:', parseError);
+        
+        // Si el status HTTP es OK pero no es JSON, asumir éxito
+        if (response.ok) {
+          toast.success('¡Reserva enviada con éxito!', {
+            description: 'Te contactaremos pronto para confirmar tu cita.',
+          });
+          form.reset();
+          return;
+        } else {
+          throw new Error(`Respuesta no válida del servidor: ${responseText.substring(0, 100)}`);
+        }
+      }
+
+      // Verificar el status en la respuesta JSON
       if (result.status === 'success') {
         toast.success('¡Reserva enviada con éxito!', {
           description: 'Te contactaremos pronto para confirmar tu cita.',
