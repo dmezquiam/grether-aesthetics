@@ -1,5 +1,5 @@
 import { Award, Heart, Shield, Sparkles } from "lucide-react";
-import heroImage from "@/assets/hero-image.jpg";
+import gretherWorkingImage from "@/assets/grether-working.jpg";
 
 const AboutSection = () => {
   const features = [
@@ -28,8 +28,8 @@ const AboutSection = () => {
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-gold rounded-3xl blur-2xl opacity-20"></div>
             <img
-              src={heroImage}
-              alt="Gretel Pérez - Esteticista Profesional"
+              src={gretherWorkingImage}
+              alt="Grether Gavilan Anias - Esteticista Profesional"
               className="relative rounded-3xl shadow-medium w-full h-auto object-cover"
             />
           </div>
@@ -40,7 +40,7 @@ const AboutSection = () => {
                 Sobre Mí
               </h2>
               <h3 className="text-4xl md:text-5xl font-bold text-foreground">
-                Gretel Pérez
+                Grether Gavilan Anias
               </h3>
               <p className="text-xl text-muted-foreground">
                 Esteticista Profesional & Auxiliar de Medicina Estética
