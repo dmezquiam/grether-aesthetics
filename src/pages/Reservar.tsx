@@ -114,6 +114,11 @@ const Reservar = () => {
               <p className="text-lg text-muted-foreground">
                 Completa el formulario y te contactaremos para confirmar tu tratamiento
               </p>
+              <div className="bg-secondary/30 border border-primary/20 rounded-lg p-4 mt-4">
+                <p className="text-sm text-foreground/80">
+                  ℹ️ <strong>Importante:</strong> Los contactaremos para confirmar su cita antes. ¡Muchas gracias!
+                </p>
+              </div>
             </div>
 
             <div className="bg-card rounded-2xl shadow-strong p-6 md:p-8 border border-border">
