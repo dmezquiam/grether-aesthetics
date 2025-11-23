@@ -64,16 +64,8 @@ const Footer = () => {
         </div>
 
         <div className="pt-8 border-t border-primary-foreground/20">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/60">
+          <div className="text-center text-sm text-primary-foreground/60">
             <p>© 2024 Grether Aesthetics. Todos los derechos reservados.</p>
-            <div className="flex gap-6">
-              <button className="hover:text-primary-foreground transition-colors">
-                Política de Privacidad
-              </button>
-              <button className="hover:text-primary-foreground transition-colors">
-                Términos y Condiciones
-              </button>
-            </div>
           </div>
         </div>
       </div>
