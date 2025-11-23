@@ -67,7 +67,7 @@ const Header = () => {
                 Reservar Cita
               </Button>
               <Button
-                onClick={() => window.open("https://wa.me/1234567890", "_blank")}
+                onClick={() => window.open("https://wa.me/34603381502", "_blank")}
                 variant="outline"
                 className="border-primary text-primary hover:bg-secondary"
               >

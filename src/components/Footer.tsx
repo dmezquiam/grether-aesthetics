@@ -21,15 +21,15 @@ const Footer = () => {
             <div className="space-y-3 text-sm">
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4" />
-                <span>+52 123 456 7890</span>
+                <span>+34 603 381 502</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4" />
-                <span>contacto@gretheraesthetics.com</span>
+                <span>grether.aesthetics86@gmail.com</span>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 mt-1" />
-                <span>Calle Principal #123<br />Ciudad, Estado 12345</span>
+                <span>Carrer de Victòria Ramis d'Ayreflor, 10, A<br />07011 Palma, Islas Baleares</span>
               </div>
             </div>
           </div>

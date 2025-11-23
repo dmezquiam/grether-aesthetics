@@ -28,8 +28,8 @@ const LocationSection = () => {
                 <div>
                   <h3 className="font-semibold text-foreground mb-1">Dirección</h3>
                   <p className="text-muted-foreground">
-                    Calle Principal #123, Colonia Centro<br />
-                    Ciudad, Estado, C.P. 12345
+                    Carrer de Victòria Ramis d'Ayreflor, 10, A<br />
+                    Poniente, 07011 Palma, Islas Baleares
                   </p>
                 </div>
               </div>
@@ -61,7 +61,7 @@ const LocationSection = () => {
 
           <div className="h-[500px] rounded-2xl overflow-hidden shadow-medium">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.1234567890!2d-99.1234567890!3d19.4326077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI1JzU3LjQiTiA5OcKwMDcnMjQuNCJX!5e0!3m2!1ses!2smx!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3074.5285887543707!2d2.6435!3d39.5726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1297925c1b6b3b77%3A0x1234567890abcdef!2sCarrer%20de%20Vict%C3%B2ria%20Ramis%20d&#39;Ayreflor%2C%2010%2C%2007011%20Palma%2C%20Illes%20Balears!5e0!3m2!1ses!2ses!4v1234567890123"
               width="100%"
               height="100%"
               style={{ border: 0 }}

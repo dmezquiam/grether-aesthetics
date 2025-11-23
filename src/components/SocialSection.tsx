@@ -1,4 +1,4 @@
-import { Instagram, Facebook } from "lucide-react";
+import { Instagram, Facebook, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const SocialSection = () => {
@@ -6,15 +6,22 @@ const SocialSection = () => {
     {
       name: "Instagram",
       icon: Instagram,
-      url: "https://instagram.com",
-      handle: "@gretheraesthetics",
+      url: "https://instagram.com/grether_aesthetics",
+      handle: "@grether_aesthetics",
       color: "bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500",
+    },
+    {
+      name: "TikTok",
+      icon: Music,
+      url: "https://tiktok.com/@grether_aesthetics",
+      handle: "@grether_aesthetics",
+      color: "bg-[#000000]",
     },
     {
       name: "Facebook",
       icon: Facebook,
-      url: "https://facebook.com",
-      handle: "Grether Aesthetics",
+      url: "https://facebook.com/GretherAesthetics",
+      handle: "GretherAesthetics",
       color: "bg-[#1877F2]",
     },
   ];

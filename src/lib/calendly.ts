@@ -11,10 +11,8 @@ declare global {
 
 export const openCalendlyPopup = () => {
   if (window.Calendly) {
-    // TODO: Replace this URL with your actual Calendly URL
-    // Example: https://calendly.com/gretel-perez
     window.Calendly.initPopupWidget({ 
-      url: 'https://calendly.com/tu-usuario' 
+      url: 'https://calendly.com/dmezquiam' 
     });
   } else {
     console.error('Calendly script not loaded');
