@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div className="space-y-4">
-            <img src={logoFull} alt="Grether Aesthetics" className="h-12 w-auto brightness-0 invert" />
+            <img src={logoFull} alt="Grether Aesthetics" className="h-12 w-auto" />
             <p className="text-primary-foreground/80 text-sm">
               Tu piel es única — dale el cuidado que merece.
             </p>
