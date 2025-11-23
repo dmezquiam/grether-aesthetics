@@ -8,7 +8,7 @@ import radiofrequency from "@/assets/service-radiofrequency.jpg";
 import acne from "@/assets/service-acne.jpg";
 import pigmentation from "@/assets/service-pigmentation.jpg";
 import antiaging from "@/assets/service-antiaging.jpg";
-import hairRemoval from "@/assets/service-hair-removal.jpg";
+
 
 const ServicesSection = () => {
   const services = [
@@ -53,12 +53,6 @@ const ServicesSection = () => {
       description: "Tecnología avanzada para tensar la piel y reducir arrugas sin dolor.",
       image: radiofrequency,
       duration: "50 min",
-    },
-    {
-      title: "Depilación Láser / Cera",
-      description: "Piel suave y sin vello con métodos profesionales y seguros.",
-      image: hairRemoval,
-      duration: "Varía",
     },
   ];
 

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-image.jpg";
+import heroImage from "@/assets/hero-gretel.jpg";
 import { openCalendlyPopup } from "@/lib/calendly";
 
 const Hero = () => {
@@ -36,7 +36,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => window.open("https://wa.me/1234567890", "_blank")}
+                onClick={() => window.open("https://wa.me/34603381502", "_blank")}
                 className="border-2 border-primary text-primary hover:bg-secondary text-lg px-8 py-6"
               >
                 Escribir por WhatsApp

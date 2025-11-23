@@ -21,7 +21,7 @@ const WhatsAppSection = () => {
 
           <Button
             size="lg"
-            onClick={() => window.open("https://wa.me/1234567890", "_blank")}
+            onClick={() => window.open("https://wa.me/34603381502", "_blank")}
             className="bg-[#25D366] hover:bg-[#20BA59] text-white text-lg px-12 py-6 shadow-medium"
           >
             <MessageCircle className="mr-2 h-5 w-5" />
