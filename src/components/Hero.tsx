@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-gretel.jpg";
+import heroImage from "@/assets/hero-grether.jpg";
 import { openCalendlyPopup } from "@/lib/calendly";
 
 const Hero = () => {
@@ -54,7 +54,7 @@ const Hero = () => {
             <div className="absolute -inset-4 bg-gradient-primary rounded-3xl blur-2xl opacity-20"></div>
             <img
               src={heroImage}
-              alt="Esteticista profesional Gretel Pérez"
+              alt="Esteticista profesional Grether Gavilan Anias"
               className="relative rounded-3xl shadow-strong w-full h-auto object-cover"
             />
           </div>
