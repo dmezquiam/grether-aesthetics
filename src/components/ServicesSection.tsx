@@ -17,42 +17,49 @@ const ServicesSection = () => {
       description: "Elimina impurezas, destapa poros y revela una piel luminosa y fresca.",
       image: facialCleaning,
       duration: "60 min",
+      price: "Precio a consultar",
     },
     {
       title: "Dermapen / Microagujas",
       description: "Estimula la producción de colágeno para una piel más firme y rejuvenecida.",
       image: dermapen,
       duration: "45 min",
+      price: "Precio a consultar",
     },
     {
       title: "Peeling Químico",
       description: "Renovación celular profunda para mejorar textura, tono y luminosidad.",
       image: peeling,
       duration: "50 min",
+      price: "Precio a consultar",
     },
     {
       title: "Tratamientos Antiacné",
       description: "Controla brotes, reduce manchas y equilibra tu piel con tratamientos especializados.",
       image: acne,
       duration: "55 min",
+      price: "Precio a consultar",
     },
     {
       title: "Eliminación de Manchas",
       description: "Trata hiperpigmentación y unifica el tono de tu piel de manera segura.",
       image: pigmentation,
       duration: "45 min",
+      price: "Precio a consultar",
     },
     {
       title: "Rejuvenecimiento Facial",
       description: "Tratamientos antiedad sin cirugía para recuperar firmeza y juventud.",
       image: antiaging,
       duration: "60 min",
+      price: "Precio a consultar",
     },
     {
       title: "Radiofrecuencia Facial",
       description: "Tecnología avanzada para tensar la piel y reducir arrugas sin dolor.",
       image: radiofrequency,
       duration: "50 min",
+      price: "Precio a consultar",
     },
   ];
 
@@ -88,7 +95,8 @@ const ServicesSection = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm mb-4">{service.description}</p>
+                <p className="text-muted-foreground text-sm mb-2">{service.description}</p>
+                <p className="text-primary font-semibold text-sm mb-4">{service.price}</p>
                 <Button
                   onClick={openCalendlyPopup}
                   variant="outline"
