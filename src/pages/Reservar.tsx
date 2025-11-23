@@ -81,24 +81,39 @@ const Reservar = () => {
       formData.append('servicio', data.servicio);
       formData.append('timestamp', new Date().toISOString());
 
+      console.log('📤 Enviando reserva...', Object.fromEntries(formData));
+
       const response = await fetch('https://script.google.com/macros/s/AKfycby1yLXKOQ-GPAMvsbZD9iJlgNaq89F_ufpFMBRDdI8ifu2zQfJC4S-4EMcKnuW54QrC3g/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: formData.toString(),
-        mode: 'no-cors',
       });
 
-      toast.success('¡Reserva enviada con éxito!', {
-        description: 'Te contactaremos pronto para confirmar tu cita.',
-      });
-      
-      form.reset();
+      console.log('📥 Respuesta recibida:', response.status);
+
+      const result = await response.json();
+      console.log('📦 Datos de respuesta:', result);
+
+      if (result.status === 'success') {
+        toast.success('¡Reserva enviada con éxito!', {
+          description: 'Te contactaremos pronto para confirmar tu cita.',
+        });
+        form.reset();
+      } else {
+        throw new Error(result.message || 'Error desconocido del servidor');
+      }
+
     } catch (error) {
-      console.error('Error al enviar la reserva:', error);
+      console.error('❌ Error al enviar la reserva:', error);
+      
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : 'Error de conexión';
+      
       toast.error('Error al enviar la reserva', {
-        description: 'Por favor, inténtalo de nuevo o contáctanos por WhatsApp.',
+        description: errorMessage + '. Intenta de nuevo o contáctanos por WhatsApp.',
       });
     } finally {
       setIsLoading(false);
