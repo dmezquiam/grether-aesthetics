@@ -50,13 +50,17 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="relative animate-fade-in">
-            <div className="absolute -inset-4 bg-gradient-primary rounded-3xl blur-2xl opacity-20"></div>
-            <img
-              src={heroImage}
-              alt="Esteticista profesional Grether Gavilan Anias"
-              className="relative rounded-3xl shadow-strong w-full h-auto object-cover"
-            />
+          <div className="relative animate-fade-in flex justify-center">
+            <div className="relative w-full max-w-sm mx-auto">
+              <div className="absolute -inset-4 bg-gradient-primary rounded-3xl blur-2xl opacity-20"></div>
+              <div className="relative aspect-[9/16] rounded-3xl overflow-hidden shadow-strong">
+                <img
+                  src={heroImage}
+                  alt="Esteticista profesional Grether Gavilan Anias"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
