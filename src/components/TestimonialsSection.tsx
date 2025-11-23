@@ -7,7 +7,7 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       name: "Carolina M.",
-      text: "Gracias a Gretel mi piel cambió por completo. Después de mi primera limpieza facial ya se veía un brillo diferente. Totalmente recomendada.",
+      text: "Gracias a Grether mi piel cambió por completo. Después de mi primera limpieza facial ya se veía un brillo diferente. Totalmente recomendada.",
       rating: 5,
     },
     {
@@ -18,6 +18,21 @@ const TestimonialsSection = () => {
     {
       name: "Verónica T.",
       text: "El mejor trato y cero dolor. Me explicó todo el proceso y me sentí muy cómoda. Volveré sin duda para más tratamientos.",
+      rating: 5,
+    },
+    {
+      name: "Isabel G.",
+      text: "Me encantó el tratamiento de radiofrecuencia. Noté resultados desde la primera sesión. Grether es muy profesional y el ambiente es muy agradable.",
+      rating: 5,
+    },
+    {
+      name: "Andrea L.",
+      text: "Las manchas en mi cara han disminuido notablemente después del tratamiento de pigmentación. Estoy fascinada con los resultados y la atención recibida.",
+      rating: 5,
+    },
+    {
+      name: "Patricia S.",
+      text: "El peeling que me hizo Grether fue excelente. Mi piel se ve renovada y más joven. Sin duda seguiré viniendo para más tratamientos.",
       rating: 5,
     },
   ];
@@ -34,7 +49,7 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
           {testimonials.map((testimonial, index) => (
             <Card
               key={index}
