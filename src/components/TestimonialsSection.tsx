@@ -1,9 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { openCalendlyPopup } from "@/lib/calendly";
+import { useNavigate } from "react-router-dom";
 
 const TestimonialsSection = () => {
+  const navigate = useNavigate();
+  
   const testimonials = [
     {
       name: "Carolina M.",
@@ -71,7 +73,7 @@ const TestimonialsSection = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button
             size="lg"
-            onClick={openCalendlyPopup}
+            onClick={() => navigate('/reservar')}
             className="bg-primary hover:bg-primary-dark text-primary-foreground shadow-medium"
           >
             Reservar Ahora
