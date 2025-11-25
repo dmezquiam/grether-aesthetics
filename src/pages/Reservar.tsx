@@ -86,47 +86,21 @@ const Reservar = () => {
 
       const response = await fetch('https://script.google.com/macros/s/AKfycby1yLXKOQ-GPAMvsbZD9iJlgNaq89F_ufpFMBRDdI8ifu2zQfJC4S-4EMcKnuW54QrC3g/exec', {
         method: 'POST',
+        mode: 'no-cors', // Solución temporal para CORS
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
       });
 
-      console.log('📥 Respuesta recibida:', response.status);
+      console.log('📥 Respuesta recibida (modo no-cors)');
 
-      // Leer respuesta como texto primero
-      const responseText = await response.text();
-      console.log('🔍 Respuesta en texto:', responseText);
-
-      // Intentar parsear como JSON
-      let result;
-      try {
-        result = JSON.parse(responseText);
-        console.log('📦 Datos de respuesta parseados:', result);
-      } catch (parseError) {
-        console.error('⚠️ Error al parsear JSON:', parseError);
-        
-        // Si el status HTTP es OK pero no es JSON, asumir éxito
-        if (response.ok) {
-          toast.success('¡Reserva enviada con éxito!', {
-            description: 'Te contactaremos pronto para confirmar tu cita.',
-          });
-          form.reset();
-          return;
-        } else {
-          throw new Error(`Respuesta no válida del servidor: ${responseText.substring(0, 100)}`);
-        }
-      }
-
-      // Verificar el status en la respuesta JSON
-      if (result.status === 'success') {
-        toast.success('¡Reserva enviada con éxito!', {
-          description: 'Te contactaremos pronto para confirmar tu cita.',
-        });
-        form.reset();
-      } else {
-        throw new Error(result.message || 'Error desconocido del servidor');
-      }
+      // Con modo 'no-cors' no podemos leer la respuesta
+      // Si llegamos aquí sin error, asumimos éxito
+      toast.success('¡Reserva enviada con éxito!', {
+        description: 'Te contactaremos pronto para confirmar tu cita.',
+      });
+      form.reset();
 
     } catch (error) {
       console.error('❌ Error al enviar la reserva:', error);
