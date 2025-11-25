@@ -104,7 +104,7 @@ const Reservar = () => {
       const params = new URLSearchParams(Object.entries(payload).map(([k, v]) => [k, String(v)]));
 
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbx64b-HQuwZradeFuYxlc7Mcc5o8HtCJXBijiFg9HP2ex824IaK1ZqFnugmncXs1Q5fAg/exec",
+        "https://script.google.com/macros/s/AKfycbwCrUepu1kO5whhzM_7UFUoDv7DnYGb86H4-3Jx4BVY3uOrjAs4LWY86TQav53eVnwBBw/exec",
         {
           method: "POST",
           headers: {
