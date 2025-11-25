@@ -28,27 +28,43 @@ const SERVICIOS = [
 ];
 
 const HORAS = [
-  "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
-  "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
-  "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
-  "18:00", "18:30", "19:00", "19:30", "20:00"
+  "09:00",
+  "09:30",
+  "10:00",
+  "10:30",
+  "11:00",
+  "11:30",
+  "12:00",
+  "12:30",
+  "13:00",
+  "13:30",
+  "14:00",
+  "14:30",
+  "15:00",
+  "15:30",
+  "16:00",
+  "16:30",
+  "17:00",
+  "17:30",
+  "18:00",
+  "18:30",
+  "19:00",
+  "19:30",
+  "20:00",
 ];
 
 const reservaSchema = z.object({
-  fecha: z.date({
-    required_error: "Por favor selecciona una fecha",
-  }).refine((date) => date > new Date(), {
-    message: "La fecha debe ser futura",
-  }),
+  fecha: z
+    .date({
+      required_error: "Por favor selecciona una fecha",
+    })
+    .refine((date) => date > new Date(), {
+      message: "La fecha debe ser futura",
+    }),
   hora: z.string().min(1, "Selecciona una hora"),
-  nombre: z.string()
-    .min(2, "El nombre debe tener al menos 2 caracteres")
-    .max(100, "El nombre es demasiado largo"),
-  telefono: z.string()
-    .regex(/^(\+34|0034|34)?[6789]\d{8}$/, "Formato de teléfono inválido (ej: +34 603 381 502)"),
-  email: z.string()
-    .email("Correo electrónico inválido")
-    .min(1, "El correo electrónico es requerido"),
+  nombre: z.string().min(2, "El nombre debe tener al menos 2 caracteres").max(100, "El nombre es demasiado largo"),
+  telefono: z.string().regex(/^(\+34|0034|34)?[6789]\d{8}$/, "Formato de teléfono inválido (ej: +34 603 381 502)"),
+  email: z.string().email("Correo electrónico inválido").min(1, "El correo electrónico es requerido"),
   servicio: z.string().min(1, "Selecciona un servicio"),
 });
 
@@ -73,7 +89,7 @@ const Reservar = () => {
 
     try {
       const payload = {
-        fecha: format(data.fecha, 'dd/MM/yyyy', { locale: es }),
+        fecha: format(data.fecha, "dd/MM/yyyy", { locale: es }),
         hora: data.hora,
         nombre: data.nombre,
         telefono: data.telefono,
@@ -82,31 +98,34 @@ const Reservar = () => {
         timestamp: new Date().toISOString(),
       };
 
-      console.log('📤 Enviando reserva...', payload);
+      console.log("📤 Enviando reserva...", payload);
 
-      const response = await fetch('https://script.google.com/macros/s/AKfycby1yLXKOQ-GPAMvsbZD9iJlgNaq89F_ufpFMBRDdI8ifu2zQfJC4S-4EMcKnuW54QrC3g/exec', {
-        method: 'POST',
-        body: new URLSearchParams(payload as Record<string, string>),
-      });
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbx6vs6JysiajYF8W8_qsQ5g8eWQ8EXiYbacr91M9XJ13VPAD4ULpwLdCPPZQi4ZM5VdaQ/exec",
+        {
+          method: "POST",
+          body: new URLSearchParams(payload as Record<string, string>),
+        },
+      );
 
-      console.log('📥 Respuesta recibida:', response.status);
+      console.log("📥 Respuesta recibida:", response.status);
 
       // Leer respuesta como texto primero
       const responseText = await response.text();
-      console.log('🔍 Respuesta en texto:', responseText);
+      console.log("🔍 Respuesta en texto:", responseText);
 
       // Intentar parsear como JSON
       let result;
       try {
         result = JSON.parse(responseText);
-        console.log('📦 Datos de respuesta parseados:', result);
+        console.log("📦 Datos de respuesta parseados:", result);
       } catch (parseError) {
-        console.error('⚠️ Error al parsear JSON:', parseError);
-        
+        console.error("⚠️ Error al parsear JSON:", parseError);
+
         // Si el status HTTP es OK pero no es JSON, asumir éxito
         if (response.ok) {
-          toast.success('¡Reserva enviada con éxito!', {
-            description: 'Te contactaremos pronto para confirmar tu cita.',
+          toast.success("¡Reserva enviada con éxito!", {
+            description: "Te contactaremos pronto para confirmar tu cita.",
           });
           form.reset();
           return;
@@ -116,24 +135,21 @@ const Reservar = () => {
       }
 
       // Verificar el status en la respuesta JSON
-      if (result.status === 'success') {
-        toast.success('¡Reserva enviada con éxito!', {
-          description: 'Te contactaremos pronto para confirmar tu cita.',
+      if (result.status === "success") {
+        toast.success("¡Reserva enviada con éxito!", {
+          description: "Te contactaremos pronto para confirmar tu cita.",
         });
         form.reset();
       } else {
-        throw new Error(result.message || 'Error desconocido del servidor');
+        throw new Error(result.message || "Error desconocido del servidor");
       }
-
     } catch (error) {
-      console.error('❌ Error al enviar la reserva:', error);
-      
-      const errorMessage = error instanceof Error 
-        ? error.message 
-        : 'Error de conexión';
-      
-      toast.error('Error al enviar la reserva', {
-        description: errorMessage + '. Intenta de nuevo o contáctanos por WhatsApp.',
+      console.error("❌ Error al enviar la reserva:", error);
+
+      const errorMessage = error instanceof Error ? error.message : "Error de conexión";
+
+      toast.error("Error al enviar la reserva", {
+        description: errorMessage + ". Intenta de nuevo o contáctanos por WhatsApp.",
       });
     } finally {
       setIsLoading(false);
@@ -143,14 +159,12 @@ const Reservar = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1 pt-24 pb-12 bg-gradient-soft">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8 space-y-4">
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-                Reserva tu Cita
-              </h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground">Reserva tu Cita</h1>
               <p className="text-lg text-muted-foreground">
                 Completa el formulario y te contactaremos para confirmar tu tratamiento
               </p>
@@ -232,7 +246,7 @@ const Reservar = () => {
                                   variant="outline"
                                   className={cn(
                                     "w-full pl-3 text-left font-normal",
-                                    !field.value && "text-muted-foreground"
+                                    !field.value && "text-muted-foreground",
                                   )}
                                 >
                                   {field.value ? (
@@ -319,12 +333,7 @@ const Reservar = () => {
                     )}
                   />
 
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    size="lg"
-                    disabled={isLoading}
-                  >
+                  <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
                     {isLoading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -339,14 +348,17 @@ const Reservar = () => {
             </div>
 
             <div className="mt-8 text-center space-y-2">
-              <p className="text-sm text-muted-foreground">
-                ¿Tienes dudas? También puedes contactarnos por:
-              </p>
+              <p className="text-sm text-muted-foreground">¿Tienes dudas? También puedes contactarnos por:</p>
               <div className="flex flex-wrap justify-center gap-4 text-sm">
                 <a href="tel:+34603381502" className="text-primary hover:underline">
                   📞 +34 603 381 502
                 </a>
-                <a href="https://wa.me/34603381502" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                <a
+                  href="https://wa.me/34603381502"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
                   💬 WhatsApp
                 </a>
                 <a href="mailto:grether.aesthetics86@gmail.com" className="text-primary hover:underline">
