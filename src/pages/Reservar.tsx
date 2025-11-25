@@ -86,10 +86,7 @@ const Reservar = () => {
 
       const response = await fetch('https://script.google.com/macros/s/AKfycby1yLXKOQ-GPAMvsbZD9iJlgNaq89F_ufpFMBRDdI8ifu2zQfJC4S-4EMcKnuW54QrC3g/exec', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
+        body: new URLSearchParams(payload as Record<string, string>),
       });
 
       console.log('📥 Respuesta recibida:', response.status);
