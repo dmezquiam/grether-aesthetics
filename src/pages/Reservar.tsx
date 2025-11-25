@@ -100,54 +100,88 @@ const Reservar = () => {
 
       console.log("📤 Enviando reserva...", payload);
 
+      // Asegurarnos de que TODOS los valores sean strings
+      const params = new URLSearchParams(Object.entries(payload).map(([k, v]) => [k, String(v)]));
+
       const response = await fetch(
         "https://script.google.com/macros/s/AKfycbx6vs6JysiajYF8W8_qsQ5g8eWQ8EXiYbacr91M9XJ13VPAD4ULpwLdCPPZQi4ZM5VdaQ/exec",
         {
           method: "POST",
-          body: new URLSearchParams(payload as Record<string, string>),
+          headers: {
+            // explícito y correcto para URLSearchParams
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            // opcional: evitar credenciales si no son necesarias
+            // "Accept": "application/json"
+          },
+          body: params.toString(),
         },
       );
 
-      console.log("📥 Respuesta recibida:", response.status);
+      console.log("📥 Respuesta recibida:", response.status, response.statusText);
+      const contentType = response.headers.get("content-type");
+      console.log("headers content-type:", contentType);
 
-      // Leer respuesta como texto primero
       const responseText = await response.text();
       console.log("🔍 Respuesta en texto:", responseText);
 
       // Intentar parsear como JSON
-      let result;
-      try {
-        result = JSON.parse(responseText);
-        console.log("📦 Datos de respuesta parseados:", result);
-      } catch (parseError) {
-        console.error("⚠️ Error al parsear JSON:", parseError);
-
-        // Si el status HTTP es OK pero no es JSON, asumir éxito
-        if (response.ok) {
-          toast.success("¡Reserva enviada con éxito!", {
-            description: "Te contactaremos pronto para confirmar tu cita.",
-          });
-          form.reset();
-          return;
-        } else {
-          throw new Error(`Respuesta no válida del servidor: ${responseText.substring(0, 100)}`);
+      let result: any = null;
+      if (contentType && contentType.includes("application/json")) {
+        try {
+          result = JSON.parse(responseText);
+        } catch (err) {
+          console.warn("content-type JSON pero fallo parseo:", err);
+        }
+      } else {
+        // Si no viene content-type JSON, intentar parsear fallback url-encoded (ej: "fecha=28%2F...")
+        if (responseText && responseText.includes("=") && responseText.indexOf("{") !== 0) {
+          try {
+            const fallback = Object.fromEntries(new URLSearchParams(responseText));
+            console.log("↪️ Parsed fallback URLSearchParams:", fallback);
+            // normalizar a un objeto con status/message si el servidor lo envió así
+            if (fallback.status || fallback.message) {
+              result = fallback;
+            }
+          } catch (err) {
+            console.warn("No pudo parsearse como URLSearchParams:", err);
+          }
         }
       }
 
-      // Verificar el status en la respuesta JSON
-      if (result.status === "success") {
+      // Si todavía no tenemos result y responseText parece JSON, intentar parsear genérico
+      if (!result) {
+        try {
+          result = JSON.parse(responseText);
+        } catch (err) {
+          // seguir adelante con result = null
+        }
+      }
+
+      // Lógica final según lo que obtuvimos
+      if (result && result.status === "success") {
         toast.success("¡Reserva enviada con éxito!", {
           description: "Te contactaremos pronto para confirmar tu cita.",
         });
         form.reset();
-      } else {
-        throw new Error(result.message || "Error desconocido del servidor");
+        return;
       }
+
+      // Si respuesta ok (200-299) pero sin JSON legible -> asumimos éxito (opcional)
+      if (response.ok && !result) {
+        // Puedes cambiar esto para ser más estricto si prefieres
+        toast.success("¡Reserva enviada con éxito!", {
+          description: "Te contactaremos pronto para confirmar tu cita.",
+        });
+        form.reset();
+        return;
+      }
+
+      // Si hay un mensaje de error en result, usarlo
+      const serverMsg = result?.message || responseText || "Respuesta no válida del servidor";
+      throw new Error(serverMsg);
     } catch (error) {
       console.error("❌ Error al enviar la reserva:", error);
-
       const errorMessage = error instanceof Error ? error.message : "Error de conexión";
-
       toast.error("Error al enviar la reserva", {
         description: errorMessage + ". Intenta de nuevo o contáctanos por WhatsApp.",
       });
