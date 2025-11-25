@@ -1,5 +1,5 @@
 import { MapPin, Navigation, Clock } from "lucide-react";
-import spaInterior from "@/assets/spa-interior.jpg";
+import spaInterior from "@/assets/salon-interior.jpg";
 
 const LocationSection = () => {
   return (
