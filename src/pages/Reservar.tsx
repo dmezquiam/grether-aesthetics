@@ -72,23 +72,24 @@ const Reservar = () => {
     setIsLoading(true);
 
     try {
-      const formData = new URLSearchParams();
-      formData.append('fecha', format(data.fecha, 'dd/MM/yyyy', { locale: es }));
-      formData.append('hora', data.hora);
-      formData.append('nombre', data.nombre);
-      formData.append('telefono', data.telefono);
-      formData.append('email', data.email);
-      formData.append('servicio', data.servicio);
-      formData.append('timestamp', new Date().toISOString());
+      const payload = {
+        fecha: format(data.fecha, 'dd/MM/yyyy', { locale: es }),
+        hora: data.hora,
+        nombre: data.nombre,
+        telefono: data.telefono,
+        email: data.email,
+        servicio: data.servicio,
+        timestamp: new Date().toISOString(),
+      };
 
-      console.log('📤 Enviando reserva...', Object.fromEntries(formData));
+      console.log('📤 Enviando reserva...', payload);
 
       const response = await fetch('https://script.google.com/macros/s/AKfycby1yLXKOQ-GPAMvsbZD9iJlgNaq89F_ufpFMBRDdI8ifu2zQfJC4S-4EMcKnuW54QrC3g/exec', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
         },
-        body: formData.toString(),
+        body: JSON.stringify(payload),
       });
 
       console.log('📥 Respuesta recibida:', response.status);
