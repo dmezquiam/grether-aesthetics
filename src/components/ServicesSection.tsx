@@ -98,14 +98,7 @@ const ServicesSection = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-sm mb-2">{service.description}</p>
-                <p className="text-primary font-semibold text-sm mb-4">{service.price}</p>
-                <Button
-                  onClick={() => navigate('/reservar')}
-                  variant="outline"
-                  className="w-full border-primary text-primary hover:bg-secondary"
-                >
-                  Agendar este servicio
-                </Button>
+                <p className="text-primary font-semibold text-sm">{service.price}</p>
               </CardContent>
             </Card>
           ))}
