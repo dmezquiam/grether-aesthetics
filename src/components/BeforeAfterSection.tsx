@@ -5,11 +5,11 @@ const BeforeAfterSection = () => {
   const comparisons = [
     {
       image: beforeAfter1,
-      treatment: "Tratamiento completo de piel",
+      treatment: "Tratamiento de pigmentación",
     },
     {
       image: beforeAfter2,
-      treatment: "Limpieza facial profunda + peeling",
+      treatment: "Tratamiento de acné y textura",
     },
   ];
 
