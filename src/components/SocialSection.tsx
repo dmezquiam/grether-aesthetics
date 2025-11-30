@@ -20,7 +20,7 @@ const SocialSection = () => {
     {
       name: "Facebook",
       icon: Facebook,
-      url: "https://facebook.com/GretherAesthetics",
+      url: "https://www.facebook.com/profile.php?id=61568152207801",
       handle: "GretherAesthetics",
       color: "bg-[#1877F2]",
     },
