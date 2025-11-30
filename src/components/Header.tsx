@@ -38,6 +38,7 @@ const Header = () => {
 
   const navItems = [
     { id: "servicios", label: "Servicios" },
+    { id: "asesoria-online", label: "Asesoría Online", isPage: true },
     { id: "antes-despues", label: "Antes y Después" },
     { id: "testimonios", label: "Testimonios" },
     { id: "ubicacion", label: "Ubicación" },
@@ -61,7 +62,13 @@ const Header = () => {
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => {
+                    if (item.isPage) {
+                      navigate('/asesoria-online');
+                    } else {
+                      scrollToSection(item.id);
+                    }
+                  }}
                   className="text-foreground hover:text-primary transition-colors text-sm font-medium"
                 >
                   {item.label}
@@ -104,7 +111,14 @@ const Header = () => {
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => {
+                    if (item.isPage) {
+                      navigate('/asesoria-online');
+                      setIsMobileMenuOpen(false);
+                    } else {
+                      scrollToSection(item.id);
+                    }
+                  }}
                   className="text-left py-2 text-foreground hover:text-primary transition-colors"
                 >
                   {item.label}

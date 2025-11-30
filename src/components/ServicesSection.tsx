@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
+import { Video } from "lucide-react";
 import facialCleaning from "@/assets/service-facial-cleaning.jpg";
 import dermapen from "@/assets/service-dermapen.jpg";
 import peeling from "@/assets/service-peeling.jpg";
@@ -8,12 +10,22 @@ import radiofrequency from "@/assets/service-radiofrequency.jpg";
 import acne from "@/assets/service-acne.jpg";
 import pigmentation from "@/assets/service-pigmentation.jpg";
 import antiaging from "@/assets/service-antiaging.jpg";
+import onlineConsultation from "@/assets/service-online-consultation.jpg";
 
 
 const ServicesSection = () => {
   const navigate = useNavigate();
   
   const services = [
+    {
+      title: "Asesoría de Piel Online",
+      description: "Análisis profesional de tu piel y rutina 100% personalizada desde casa.",
+      image: onlineConsultation,
+      duration: "Online",
+      price: "Desde 25€",
+      isOnline: true,
+      link: "/asesoria-online",
+    },
     {
       title: "Limpieza Facial Profunda",
       description: "Elimina impurezas, destapa poros y revela una piel luminosa y fresca.",
@@ -81,14 +93,25 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <Card
               key={index}
-              className="overflow-hidden hover:shadow-strong transition-all duration-300 hover:-translate-y-1 bg-card border-border"
+              className={`overflow-hidden hover:shadow-strong transition-all duration-300 hover:-translate-y-1 bg-card cursor-pointer ${
+                service.isOnline ? 'border-2 border-accent ring-2 ring-accent/20' : 'border-border'
+              }`}
+              onClick={() => navigate(service.link || '/reservar')}
             >
-              <div className="aspect-[4/3] overflow-hidden">
+              <div className="aspect-[4/3] overflow-hidden relative">
                 <img
                   src={service.image}
                   alt={service.title}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
+                {service.isOnline && (
+                  <div className="absolute top-3 right-3">
+                    <Badge className="bg-accent text-accent-foreground shadow-medium">
+                      <Video className="w-3 h-3 mr-1" />
+                      Online
+                    </Badge>
+                  </div>
+                )}
               </div>
               <CardHeader>
                 <CardTitle className="text-xl">{service.title}</CardTitle>
