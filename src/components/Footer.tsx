@@ -66,7 +66,7 @@ const Footer = () => {
 
         <div className="pt-8 border-t border-primary-foreground/20">
           <div className="text-center text-sm text-primary-foreground/60">
-            <p>© 2024 Grether Aesthetics. Todos los derechos reservados.</p>
+            <p>© {new Date().getFullYear()} Grether Aesthetics. Todos los derechos reservados.</p>
           </div>
         </div>
       </div>
